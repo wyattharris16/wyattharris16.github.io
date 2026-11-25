@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deal Lab: Utah Case Challenge</title>
+<style>
+  :root {
+    --ink: #22303a;
+    --paper: #f6f1e7;
+    --brick: #8c3b26;
+    --gold: #f2c14e;
+    --green: #2e7d32;
+    --red: #b23a2a;
+    --card: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    min-height: 100vh;
+  }
+  header {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 14px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  header h1 { margin: 0; font-size: 1.3em; letter-spacing: .04em; }
+  header h1 span { color: var(--gold); }
+  header nav a { color: var(--paper); text-decoration: none; margin-left: 18px; font-weight: bold; }
+  header nav a:hover { color: var(--gold); }
+  .wrap { max-width: 820px; margin: 0 auto; padding: 28px 18px 60px; }
+  .panel {
+    background: var(--card);
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0,0,0,.08);
+    padding: 26px 30px;
+    margin-bottom: 22px;
+  }
+  h2 { color: var(--brick); margin-top: 0; }
+  .btn {
+    background: var(--brick);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 22px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .btn:hover { background: #a7472f; }
+  .btn.secondary { background: #e9e2d3; color: var(--ink); }
+  .btn.secondary:hover { background: #ddd4c1; }
+  .btn:disabled { opacity: .5; cursor: not-allowed; }
+  .hud {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+  }
+  .hud div {
+    flex: 1;
+    min-width: 120px;
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 10px;
+    padding: 10px 14px;
+    text-align: center;
+  }
+  .hud small { display: block; opacity: .75; font-size: .75em; text-transform: uppercase; letter-spacing: .08em; }
+  .hud strong { font-size: 1.5em; }
+  #timer.low { color: #ff8a7a; }
+  .timebar { height: 6px; background: #e9e2d3; border-radius: 3px; overflow: hidden; margin-bottom: 18px; }
+  .timebar div { height: 100%; background: var(--gold); width: 100%; transition: width 1s linear; }
+  .tag {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--ink);
+    font-size: .75em;
+    font-weight: bold;
+    border-radius: 20px;
+    padding: 3px 10px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+  }
+  .memo {
+    background: #fbf7ef;
+    border-left: 4px solid var(--brick);
+    padding: 12px 16px;
+    margin: 14px 0;
+    font-family: Georgia, serif;
+    line-height: 1.55;
+  }
+  .memo table { border-collapse: collapse; width: 100%; margin-top: 6px; }
+  .memo td { padding: 3px 4px; border-bottom: 1px dotted #d8cfbd; }
+  .memo td:last-child { text-align: right; }
+  .question { font-weight: bold; font-size: 1.08em; margin: 16px 0 10px; }
+  .choices { display: grid; gap: 10px; }
+  .choice {
+    text-align: left;
+    background: #fff;
+    border: 2px solid #e3dccd;
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 1em;
+    cursor: pointer;
+    font-family: inherit;
+    color: var(--ink);
+  }
+  .choice:hover:not(:disabled) { border-color: var(--brick); }
+  .choice.right { border-color: var(--green); background: #e8f5e9; }
+  .choice.wrong { border-color: var(--red); background: #fdecea; }
+  .numrow { display: flex; gap: 10px; flex-wrap: wrap; }
+  .numrow input {
+    flex: 1;
+    min-width: 180px;
+    padding: 12px;
+    font-size: 1.05em;
+    border: 2px solid #e3dccd;
+    border-radius: 8px;
+    font-family: inherit;
+  }
+  .numrow input:focus { outline: none; border-color: var(--brick); }
+  .actions { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+  .hint { background: #fff6dc; border-radius: 8px; padding: 10px 14px; margin-top: 12px; display: none; }
+  .feedback { border-radius: 10px; padding: 16px 18px; margin-top: 16px; display: none; line-height: 1.5; }
+  .feedback.good { background: #e8f5e9; border: 2px solid var(--green); }
+  .feedback.bad { background: #fdecea; border: 2px solid var(--red); }
+  .feedback h3 { margin: 0 0 6px; }
+  .cheat { display: none; }
+  .cheat.open { display: block; }
+  .cheat ul { margin: 0; padding-left: 20px; line-height: 1.7; }
+  .scorecard table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+  .scorecard th, .scorecard td { padding: 8px; border-bottom: 1px solid #e3dccd; text-align: left; }
+  .scorecard td.pts { text-align: right; font-weight: bold; }
+  .rank { font-size: 1.6em; color: var(--brick); font-weight: bold; margin: 6px 0; }
+  .hidden { display: none; }
+  .intro-list { line-height: 1.7; }
+  footer { text-align: center; font-size: .85em; color: #6b6b6b; padding-bottom: 30px; }
+  footer a { color: var(--brick); }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Deal <span>Lab</span> · Utah Case Challenge</h1>
+  <nav>
+    <a href="scratch.html">Utah Tracker</a>
+    <a href="index.html">Home</a>
+  </nav>
+</header>
+
+<div class="wrap">
+
+  <!-- START SCREEN -->
+  <section id="startScreen" class="panel">
+    <span class="tag">Real estate case competition</span>
+    <h2>Can you underwrite a Utah deal under pressure?</h2>
+    <p>You've just joined a real estate investment firm in Provo. The managing partner drops six deal memos on your desk, from Orem to St. George. Each one hides a trap that trips up beginner investors.</p>
+    <ul class="intro-list">
+      <li><strong>90 seconds per case.</strong> Faster answers earn a time bonus.</li>
+      <li><strong>100 points</strong> for a correct answer, plus 1 point for every second left.</li>
+      <li><strong>Hints cost 30 points.</strong> Use them wisely.</li>
+      <li>After each case, the "judges" explain the concept so you learn it either way.</li>
+    </ul>
+    <p>The big idea you'll practice: <strong>NOI (net operating income)</strong> and the <strong>cap rate</strong>, the two numbers that drive how investors value income property.</p>
+    <p id="bestScore"></p>
+    <div class="actions">
+      <button class="btn" id="startBtn">Start the Competition</button>
+      <button class="btn secondary" id="cheatBtn1">Formula Cheat Sheet</button>
+    </div>
+  </section>
+
+  <!-- GAME SCREEN -->
+  <section id="gameScreen" class="hidden">
+    <div class="hud">
+      <div><small>Case</small><strong id="caseNum">1/6</strong></div>
+      <div><small>Time left</small><strong id="timer">90</strong></div>
+      <div><small>Score</small><strong id="score">0</strong></div>
+    </div>
+    <div class="timebar"><div id="timebarFill"></div></div>
+
+    <div class="panel">
+      <span class="tag" id="caseTag"></span>
+      <h2 id="caseTitle"></h2>
+      <div class="memo" id="caseMemo"></div>
+      <div class="question" id="caseQuestion"></div>
+
+      <div id="choiceArea" class="choices"></div>
+
+      <div id="numArea" class="hidden">
+        <div class="numrow">
+          <input id="numInput" type="text" inputmode="decimal" placeholder="Type your answer" autocomplete="off">
+          <button class="btn" id="submitBtn">Submit</button>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn secondary" id="hintBtn">Use a Hint (−30)</button>
+        <button class="btn secondary" id="cheatBtn2">Cheat Sheet</button>
+      </div>
+      <div class="hint" id="hintBox"></div>
+
+      <div class="feedback" id="feedback"></div>
+      <div class="actions">
+        <button class="btn hidden" id="nextBtn">Next Case →</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="cheatSheet" class="panel cheat">
+    <h2>Formula Cheat Sheet</h2>
+    <ul>
+      <li><strong>Gross Potential Rent</strong> = monthly rent × units × 12</li>
+      <li><strong>Effective Gross Income</strong> = Gross Potential Rent − vacancy</li>
+      <li><strong>NOI</strong> = Effective Gross Income − operating expenses</li>
+      <li>Operating expenses include taxes, insurance, repairs, management, utilities the owner pays and reserves.</li>
+      <li><strong>NOT</strong> in NOI: mortgage payments, interest, depreciation, income taxes.</li>
+      <li><strong>Cap Rate</strong> = NOI ÷ Value</li>
+      <li><strong>Value</strong> = NOI ÷ Cap Rate</li>
+    </ul>
+  </section>
+
+  <!-- END SCREEN -->
+  <section id="endScreen" class="panel scorecard hidden">
+    <span class="tag">Judges' scorecard</span>
+    <h2>Competition Results</h2>
+    <p class="rank" id="rankTitle"></p>
+    <p id="rankText"></p>
+    <table>
+      <thead><tr><th>Case</th><th>Result</th><th style="text-align:right">Points</th></tr></thead>
+      <tbody id="scoreRows"></tbody>
+    </table>
+    <p><strong>Total: <span id="finalScore"></span></strong> out of a possible 1,140</p>
+    <div class="actions">
+      <button class="btn" id="againBtn">Play Again</button>
+      <a class="btn secondary" style="text-decoration:none" href="scratch.html">Back to the Utah Tracker</a>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  Built by Wyatt Harris with help from AI · <a href="scratch.html">Utah Real Estate Investment Tracker</a> · <a href="index.html">Professional site</a>
+</footer>
+
+<script>
+const TIME_PER_CASE = 90;
+
+const cases = [
+  {
+    tag: "Orem · Financing teaser",
+    title: "The Triplex Twins",
+    memo: `Two investors buy identical triplexes on the same Orem street. Each unit rents for <strong>$1,500/month</strong>, and both properties have the same taxes, insurance and repairs.<br><br>
+           <strong>Investor A</strong> pays all cash.<br>
+           <strong>Investor B</strong> puts 25% down and takes a loan with a <strong>$2,800/month</strong> mortgage payment.`,
+    question: "Whose property has the higher NOI?",
+    type: "choice",
+    choices: [
+      "Investor A, because they have no mortgage payment",
+      "Investor B, because the loan lets them deduct interest",
+      "They have exactly the same NOI",
+      "You can't tell without knowing the interest rate"
+    ],
+    answer: 2,
+    hint: "NOI measures how the PROPERTY performs, not how the buyer paid for it.",
+    lesson: "NOI is calculated <em>before</em> debt service. Financing changes the investor's cash flow, but not the property's NOI. That's why two buyers can compare the same building using cap rates no matter how they finance it."
+  },
+  {
+    tag: "Provo · Calculation",
+    title: "The Student Duplex near BYU",
+    memo: `A Provo duplex. Each unit rents for <strong>$1,650/month</strong>.
+      <table>
+        <tr><td>Vacancy allowance</td><td>5% of gross rent</td></tr>
+        <tr><td>Property taxes</td><td>$3,100/yr</td></tr>
+        <tr><td>Insurance</td><td>$1,500/yr</td></tr>
+        <tr><td>Repairs & maintenance</td><td>$2,400/yr</td></tr>
+        <tr><td>Property management</td><td>$3,000/yr</td></tr>
+        <tr><td>Capital reserve</td><td>$1,200/yr</td></tr>
+        <tr><td>Mortgage payments</td><td>$24,000/yr</td></tr>
+      </table>`,
+    question: "What is the property's annual NOI? (in dollars)",
+    type: "number",
+    answer: 26420,
+    tolerance: 0.01,
+    format: "money",
+    hint: "Gross rent = $1,650 × 2 × 12 = $39,600. Take off vacancy, then subtract operating expenses. Is a mortgage an operating expense?",
+    lesson: "Gross rent $39,600 − 5% vacancy ($1,980) = $37,620 effective income. Operating expenses are $3,100 + $1,500 + $2,400 + $3,000 + $1,200 = $11,200. <strong>NOI = $26,420.</strong> The $24,000 mortgage was a trap: debt service never goes in NOI."
+  },
+  {
+    tag: "Lehi · Valuation",
+    title: "Silicon Slopes Office Building",
+    memo: `A Class A office building in Lehi, fully leased to tech tenants.
+      <table>
+        <tr><td>NOI</td><td>$1,140,000/yr</td></tr>
+        <tr><td>Recent comparable sales cap rate</td><td>6.0%</td></tr>
+      </table>`,
+    question: "Using the market cap rate, what is the building worth? (in dollars)",
+    type: "number",
+    answer: 19000000,
+    tolerance: 0.01,
+    format: "money",
+    hint: "Value = NOI ÷ Cap Rate. Remember 6.0% = 0.06.",
+    lesson: "Value = $1,140,000 ÷ 0.06 = <strong>$19,000,000</strong>. This is the income approach: investors pay for the income stream, and the market cap rate tells you what multiple of income buyers are paying."
+  },
+  {
+    tag: "St. George · Seller's trap",
+    title: "The \"7.2% Cap Rate\" Fourplex",
+    memo: `A St. George fourplex is listed at <strong>$750,000</strong>. The seller's flyer brags about a <strong>7.2% cap rate</strong>:
+      <table>
+        <tr><td>Rent: 4 units × $1,500 × 12</td><td>$72,000</td></tr>
+        <tr><td>Property taxes</td><td>−$6,000</td></tr>
+        <tr><td>Insurance</td><td>−$3,600</td></tr>
+        <tr><td>Utilities</td><td>−$8,400</td></tr>
+        <tr><td><strong>Seller's NOI</strong></td><td><strong>$54,000</strong></td></tr>
+      </table>
+      Your research shows the seller left out a <strong>6% vacancy</strong> allowance, <strong>8% management</strong> (of gross rent) and <strong>$4,800/yr</strong> of repairs and reserves.`,
+    question: "What is the TRUE cap rate? (as a percent, e.g. 6.5)",
+    type: "number",
+    answer: 5.216,
+    tolerance: 0.02,
+    format: "pct",
+    hint: "Vacancy = 6% × $72,000. Management = 8% × $72,000. Subtract both plus $4,800 from $54,000, then divide by $750,000.",
+    lesson: "Vacancy $4,320 + management $5,760 + repairs $4,800 = $14,880 in missing expenses. True NOI = $54,000 − $14,880 = $39,120. Cap rate = $39,120 ÷ $750,000 = <strong>5.2%</strong>, not 7.2%. Always rebuild the seller's numbers yourself; pro formas tend to be optimistic."
+  },
+  {
+    tag: "Ogden · Market shift",
+    title: "Cap Rate Compression on 25th Street",
+    memo: `You own a mixed-use building in downtown Ogden with an NOI of <strong>$300,000</strong>. When you bought it, buildings like it traded at a <strong>7.5% cap rate</strong>. Demand for Ogden has grown, and similar buildings now trade at a <strong>6.5% cap rate</strong>. Your NOI hasn't changed.`,
+    question: "Roughly how much value did the market create for you?",
+    type: "choice",
+    choices: [
+      "About $46,000",
+      "About $300,000",
+      "About $615,000",
+      "Nothing, because NOI stayed the same"
+    ],
+    answer: 2,
+    hint: "Value the building twice: once at 7.5% and once at 6.5%. Then subtract.",
+    lesson: "$300,000 ÷ 0.075 = $4,000,000. $300,000 ÷ 0.065 ≈ $4,615,000. The building gained about <strong>$615,000</strong> without changing anything. That's cap rate compression: lower cap rates mean higher values. It works in reverse too, which is why rising interest rates can hurt property values."
+  },
+  {
+    tag: "Salt Lake City · Value-add",
+    title: "The 40-Unit Renovation Play",
+    memo: `A 40-unit apartment building in Salt Lake City. If you renovate the kitchens for <strong>$400,000</strong>, you can raise rent by <strong>$75 per unit per month</strong>. Operating expenses stay the same. The market cap rate is <strong>6.0%</strong>.`,
+    question: "How much value does the rent increase create? (in dollars)",
+    type: "number",
+    answer: 600000,
+    tolerance: 0.01,
+    format: "money",
+    hint: "Find the added NOI per year first (40 × $75 × 12), then divide by the cap rate.",
+    lesson: "Added NOI = 40 × $75 × 12 = $36,000/yr. Added value = $36,000 ÷ 0.06 = <strong>$600,000</strong>. Spending $400,000 to create $600,000 of value is the core of value-add investing, and it's the same strategy I underwrote in the BYU Real Estate Case Competition."
+  }
+];
+
+// ---------- state ----------
+let current = 0;
+let score = 0;
+let timeLeft = TIME_PER_CASE;
+let timerId = null;
+let hintUsed = false;
+let answered = false;
+let results = [];
+
+const $ = id => document.getElementById(id);
+
+function safeGet(key) {
+  try { return localStorage.getItem(key); } catch (e) { return null; }
+}
+function safeSet(key, val) {
+  try { localStorage.setItem(key, val); } catch (e) { /* storage unavailable */ }
+}
+
+function showBest() {
+  const best = safeGet("dealLabBest");
+  $("bestScore").textContent = best ? `Your best score so far: ${best} points.` : "";
+}
+
+function fmtMoney(n) {
+  return "$" + Math.round(n).toLocaleString("en-US");
+}
+
+function parseNumber(str) {
+  let s = String(str).trim().toLowerCase().replace(/[$,%\s]/g, "");
+  let mult = 1;
+  if (s.endsWith("m")) { mult = 1e6; s = s.slice(0, -1); }
+  else if (s.endsWith("k")) { mult = 1e3; s = s.slice(0, -1); }
+  const n = parseFloat(s);
+  return isNaN(n) ? null : n * mult;
+}
+
+function startGame() {
+  current = 0;
+  score = 0;
+  results = [];
+  $("startScreen").classList.add("hidden");
+  $("endScreen").classList.add("hidden");
+  $("cheatSheet").classList.remove("open");
+  $("gameScreen").classList.remove("hidden");
+  loadCase();
+}
+
+function loadCase() {
+  const c = cases[current];
+  answered = false;
+  hintUsed = false;
+  timeLeft = TIME_PER_CASE;
+
+  $("caseNum").textContent = `${current + 1}/${cases.length}`;
+  $("score").textContent = score;
+  $("caseTag").textContent = c.tag;
+  $("caseTitle").textContent = c.title;
+  $("caseMemo").innerHTML = c.memo;
+  $("caseQuestion").textContent = c.question;
+  $("hintBox").style.display = "none";
+  $("hintBox").textContent = c.hint;
+  $("hintBtn").disabled = false;
+  $("feedback").style.display = "none";
+  $("nextBtn").classList.add("hidden");
+
+  const choiceArea = $("choiceArea");
+  choiceArea.innerHTML = "";
+  if (c.type === "choice") {
+    $("numArea").classList.add("hidden");
+    c.choices.forEach((text, i) => {
+      const b = document.createElement("button");
+      b.className = "choice";
+      b.textContent = text;
+      b.addEventListener("click", () => submitChoice(i));
+      choiceArea.appendChild(b);
+    });
+  } else {
+    $("numArea").classList.remove("hidden");
+    $("numInput").value = "";
+    $("numInput").disabled = false;
+    $("submitBtn").disabled = false;
+    $("numInput").focus();
+  }
+
+  updateTimer();
+  clearInterval(timerId);
+  timerId = setInterval(tick, 1000);
+}
+
+function tick() {
+  timeLeft--;
+  updateTimer();
+  if (timeLeft <= 0) {
+    clearInterval(timerId);
+    finishCase(false, "Time's up!");
+  }
+}
+
+function updateTimer() {
+  $("timer").textContent = timeLeft;
+  $("timer").classList.toggle("low", timeLeft <= 15);
+  $("timebarFill").style.width = (timeLeft / TIME_PER_CASE * 100) + "%";
+}
+
+function submitChoice(i) {
+  if (answered) return;
+  const c = cases[current];
+  const buttons = $("choiceArea").querySelectorAll(".choice");
+  buttons.forEach((b, idx) => {
+    b.disabled = true;
+    if (idx === c.answer) b.classList.add("right");
+    if (idx === i && i !== c.answer) b.classList.add("wrong");
+  });
+  finishCase(i === c.answer);
+}
+
+function submitNumber() {
+  if (answered) return;
+  const c = cases[current];
+  const val = parseNumber($("numInput").value);
+  if (val === null) {
+    $("numInput").placeholder = "Please enter a number";
+    $("numInput").value = "";
+    return;
+  }
+  const correct = Math.abs(val - c.answer) <= Math.abs(c.answer * c.tolerance);
+  $("numInput").disabled = true;
+  $("submitBtn").disabled = true;
+  finishCase(correct, null, val);
+}
+
+function finishCase(correct, reason, given) {
+  answered = true;
+  clearInterval(timerId);
+  $("hintBtn").disabled = true;
+
+  const c = cases[current];
+  let pts = 0;
+  if (correct) {
+    pts = 100 + Math.max(timeLeft, 0) - (hintUsed ? 30 : 0);
+  }
+  score += pts;
+  $("score").textContent = score;
+  results.push({ title: c.title, correct, pts, hint: hintUsed });
+
+  let answerText = "";
+  if (c.type === "number") {
+    answerText = c.format === "money" ? fmtMoney(c.answer) : c.answer.toFixed(1) + "%";
+  } else {
+    answerText = c.choices[c.answer];
+  }
+
+  const fb = $("feedback");
+  fb.className = "feedback " + (correct ? "good" : "bad");
+  fb.innerHTML = `
+    <h3>${correct ? "✅ The judges are impressed! +" + pts : (reason ? "⏰ " + reason : "❌ Not quite.")}</h3>
+    ${!correct ? `<p><strong>Correct answer:</strong> ${answerText}</p>` : ""}
+    <p><strong>Judges' notes:</strong> ${c.lesson}</p>`;
+  fb.style.display = "block";
+
+  const next = $("nextBtn");
+  next.textContent = current === cases.length - 1 ? "See My Scorecard →" : "Next Case →";
+  next.classList.remove("hidden");
+  next.focus();
+}
+
+function useHint() {
+  if (answered || hintUsed) return;
+  hintUsed = true;
+  $("hintBox").style.display = "block";
+  $("hintBtn").disabled = true;
+}
+
+function nextCase() {
+  current++;
+  if (current < cases.length) {
+    loadCase();
+  } else {
+    endGame();
+  }
+}
+
+function endGame() {
+  $("gameScreen").classList.add("hidden");
+  $("endScreen").classList.remove("hidden");
+
+  const rows = results.map((r, i) => `
+    <tr>
+      <td>${i + 1}. ${r.title}</td>
+      <td>${r.correct ? "✅ Correct" + (r.hint ? " (hint)" : "") : "❌ Missed"}</td>
+      <td class="pts">${r.pts}</td>
+    </tr>`).join("");
+  $("scoreRows").innerHTML = rows;
+  $("finalScore").textContent = score;
+
+  const correctCount = results.filter(r => r.correct).length;
+  let title, text;
+  if (correctCount === 6 && score >= 900) {
+    title = "🏆 Case Competition Champion";
+    text = "Flawless and fast. You'd be the one presenting to the judges.";
+  } else if (correctCount >= 5) {
+    title = "🥈 Senior Analyst";
+    text = "Strong underwriting. One more pass on the judges' notes and you've got it.";
+  } else if (correctCount >= 3) {
+    title = "📊 Junior Analyst";
+    text = "You know the basics. Review the cheat sheet, especially what does and doesn't go in NOI.";
+  } else {
+    title = "🏠 Intern in Training";
+    text = "Everyone starts somewhere. Read the judges' notes and give it another shot.";
+  }
+  $("rankTitle").textContent = title;
+  $("rankText").textContent = `You solved ${correctCount} of 6 cases. ${text}`;
+
+  const best = parseInt(safeGet("dealLabBest") || "0", 10);
+  if (score > best) safeSet("dealLabBest", String(score));
+  showBest();
+}
+
+function toggleCheat() {
+  $("cheatSheet").classList.toggle("open");
+  if ($("cheatSheet").classList.contains("open")) {
+    $("cheatSheet").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}
+
+// ---------- wire up ----------
+$("startBtn").addEventListener("click", startGame);
+$("againBtn").addEventListener("click", startGame);
+$("cheatBtn1").addEventListener("click", toggleCheat);
+$("cheatBtn2").addEventListener("click", toggleCheat);
+$("hintBtn").addEventListener("click", useHint);
+$("submitBtn").addEventListener("click", submitNumber);
+$("nextBtn").addEventListener("click", nextCase);
+$("numInput").addEventListener("keydown", e => { if (e.key === "Enter") submitNumber(); });
+
+showBest();
+</script>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Utah Real Estate Investment Tracker | Wyatt Harris</title>
+  <link rel="stylesheet" href="css/scratch.css">
+  <script type="module" src="https://public.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
+</head>
+<body>
+
+  <div class="topbar">
+    <a href="index.html">Home</a>
+    <a href="resume.html">Résumé</a>
+    <a href="#tracker">Market Tracker</a>
+    <a href="app.html">Deal Lab Game</a>
+  </div>
+
+  <div class="banner" id="top">
+    <h1>Utah Real Estate Investment Tracker</h1>
+    <p>Following the Wasatch Front and beyond, one county at a time.</p>
+  </div>
+
+  <div class="wrapper">
+    <div class="clearfix">
+
+      <div class="main-column">
+
+        <div class="card" id="why">
+          <h2>Why I Follow the Utah Market</h2>
+          <p>Real estate investing is the thing I can't stop thinking about. I appraise homes, I've interned with real estate firms, and I live in Provo, which sits in one of the fastest-growing counties in the country. This page is where I keep track of what Utah's housing market is doing and how I think about a deal before I'd ever put money into it.</p>
+          <img src="images/duplex.svg" alt="Illustration of a two-unit rental duplex with a For Rent sign">
+          <p class="caption">A small duplex is the classic first rental for a lot of Utah investors.</p>
+        </div>
+
+        <div class="card" id="tracker">
+          <h2>Utah Market Tracker</h2>
+          <p>Median single-family sale prices from the most recent reports. Last updated November 2026.</p>
+          <table class="tracker">
+            <tr>
+              <th>Market</th>
+              <th>Median Price</th>
+              <th>Change (YoY)</th>
+              <th>Period</th>
+            </tr>
+            <tr>
+              <td>Utah (statewide, all MLSs)</td>
+              <td>$530,000</td>
+              <td class="up">+1.9%</td>
+              <td>Sep 2026</td>
+            </tr>
+            <tr>
+              <td>Salt Lake County</td>
+              <td>$645,000</td>
+              <td class="up">+4.9%</td>
+              <td>Q2 2026</td>
+            </tr>
+            <tr>
+              <td>Utah County</td>
+              <td>$600,000</td>
+              <td class="down">-0.8%</td>
+              <td>Q2 2026</td>
+            </tr>
+            <tr>
+              <td>Davis County</td>
+              <td>$568,450</td>
+              <td class="down">-1.6%</td>
+              <td>Q2 2026</td>
+            </tr>
+            <tr>
+              <td>Weber County</td>
+              <td>$499,000</td>
+              <td class="up">+3.1%</td>
+              <td>Q2 2026</td>
+            </tr>
+            <tr>
+              <td>Tooele County</td>
+              <td>$487,495</td>
+              <td class="down">-1.5%</td>
+              <td>Q2 2026</td>
+            </tr>
+            <tr>
+              <td>Wasatch County</td>
+              <td>~$1,200,000</td>
+              <td class="up">~+21%</td>
+              <td>Q1 2026</td>
+            </tr>
+            <tr>
+              <td>Summit County</td>
+              <td>~$2,200,000</td>
+              <td class="down">~-5%</td>
+              <td>Q1 2026</td>
+            </tr>
+          </table>
+          <p><strong>My takeaway:</strong> Utah prices are basically flat to slightly up statewide. Salt Lake County keeps setting records, while Utah County, my home market, cooled a little. For an investor, a flat market means the deal has to work on cash flow today, not on hoped-for appreciation.</p>
+        </div>
+
+        <div class="card" id="checklist">
+          <h2>My Deal Checklist</h2>
+          <p>Before I'd make an offer on a Utah rental, I'd work through these steps in order:</p>
+          <ol>
+            <li>Pick the submarket
+              <ul>
+                <li>Job growth (Silicon Slopes in Lehi and Draper)</li>
+                <li>Population growth (Utah County is projected to roughly double by 2065)</li>
+                <li>Landlord-friendly rules and HOA restrictions</li>
+              </ul>
+            </li>
+            <li>Find the true income
+              <ul>
+                <li>Market rent from comparable rentals, not the seller's pro forma</li>
+                <li>A vacancy allowance (I use 5% to 8%)</li>
+              </ul>
+            </li>
+            <li>Subtract real operating expenses
+              <ul>
+                <li>Property taxes, insurance, repairs, management</li>
+                <li>A capital reserve for roofs, HVAC and water heaters</li>
+              </ul>
+            </li>
+            <li>Calculate NOI and cap rate (see the cap rate triangle in the sidebar)</li>
+            <li>Stress-test the financing at today's interest rates</li>
+          </ol>
+        </div>
+
+        <div class="card" id="video">
+          <h2>Utah Housing Outlook for 2026</h2>
+          <p>A quick news segment on where Utah's housing market was expected to head this year.</p>
+          <div class="video-box">
+            <iframe src="https://www.youtube.com/embed/x3gmdgMV-zc" title="Utah housing market outlook in 2026" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="sidebar">
+        <h3>On This Page</h3>
+        <ul class="jump">
+          <li><a href="#why">Why Utah</a></li>
+          <li><a href="#tracker">Market Tracker</a></li>
+          <li><a href="#checklist">Deal Checklist</a></li>
+          <li><a href="#video">2026 Outlook Video</a></li>
+          <li><a href="#tableau">Prices vs. Rents Chart</a></li>
+          <li><a href="#sources">Sources</a></li>
+        </ul>
+        <h3>Quick Numbers</h3>
+        <p class="bignum">$530K</p>
+        <p class="small">Utah statewide median sale price, Sep 2026</p>
+        <p class="bignum">91%</p>
+        <p class="small">Utah renters who can't afford a median-priced home (Gardner Institute)</p>
+        <h3>Cap Rate Triangle</h3>
+        <img src="images/caprate.svg" alt="Cap rate triangle showing NOI on top and value times cap rate on the bottom">
+        <p class="small">Cover what you want to solve for. Value = NOI ÷ Cap Rate.</p>
+      </div>
+
+    </div>
+
+    <div class="card" id="tableau">
+      <h2>Home Prices vs. Rents in Utah Cities</h2>
+      <p>Investors care about the gap between what a home costs and what it rents for. Use the city filter on the right to compare Provo, Orem, Salt Lake City, St. George and more. (Interactive Tableau chart from the Standard-Examiner, using Zillow data from 1996 to 2017.)</p>
+      <div class="tableau-box">
+        <tableau-viz id="utahViz" src="https://public.tableau.com/views/UtahHousingMarket_Valuesandrents/Valuesandrents" width="100%" height="560" toolbar="bottom" hide-tabs></tableau-viz>
+      </div>
+    </div>
+
+    <div class="app-callout">
+      <h2>Think you can underwrite a Utah deal?</h2>
+      <p>Try my Deal Lab case challenge: six quick brain-teaser cases on Utah properties that test whether you really understand NOI and cap rates.</p>
+      <a class="button" href="app.html">Play the Deal Lab</a>
+    </div>
+
+    <div class="card" id="sources">
+      <h2>Sources</h2>
+      <ul>
+        <li><a href="https://www.utahbusiness.com/press-releases/2026/07/22/high-demand-salt-lake-county-home-price-utah-alpine-huntsville-eden/" target="_blank" rel="noopener">Salt Lake Board of Realtors Q2 2026 county data (Utah Business)</a></li>
+        <li><a href="https://attheu.utah.edu/facultystaff/utahs-housing-market-stabilizes-slightly-but-affordability-barriers-remain/" target="_blank" rel="noopener">Kem C. Gardner Policy Institute, State of the State's Housing Market 2025–2026</a></li>
+        <li><a href="https://townlift.com/2026/09/summit-county-home-prices-fall-but-most-renters-remain-priced-out/" target="_blank" rel="noopener">Summit and Wasatch County prices (TownLift)</a></li>
+        <li><a href="https://bestutahrealestate.com/utah/market-stats" target="_blank" rel="noopener">Utah statewide market report, Sep 2026 (Utah Association of Realtors data)</a></li>
+        <li><a href="https://www.zillow.com/UT/home-values/" target="_blank" rel="noopener">Zillow Home Value Index: Utah</a></li>
+      </ul>
+      <p><a href="#top">Back to top ↑</a></p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>Built from scratch by Wyatt Harris &middot; <a href="index.html">Back to my professional site</a> &middot; <a href="app.html">Deal Lab Game</a></p>
+  </div>
+
+</body>
+</html>

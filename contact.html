@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact | Wasatch Yield</title>
+  <meta name="description" content="Utah real estate investing, by the numbers. Market data, investor tools and analysis for the Utah housing market by Wyatt Harris.">
+  <!-- Bootstrap theme: Bootswatch "Lux" -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/lux/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html"><i class="bi bi-buildings"></i> Wasatch Yield</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Markets</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="markets.html">Utah Overview &amp; Map</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="provo-orem.html">Provo / Orem</a></li>
+              <li><a class="dropdown-item" href="lehi.html">Lehi</a></li>
+              <li><a class="dropdown-item" href="salt-lake-city.html">Salt Lake City</a></li>
+              <li><a class="dropdown-item" href="st-george.html">St. George</a></li>
+              <li><a class="dropdown-item" href="ogden.html">Ogden</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="tools.html">Investor Tools</a></li>
+          <li class="nav-item"><a class="nav-link" href="glossary.html">Glossary</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="resume.html">Résumé</a></li>
+          <li class="nav-item"><a class="nav-link active" aria-current="page" href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="page-header">
+    <div class="container">
+      <p class="eyebrow"><i class="bi bi-envelope"></i> Wasatch Yield</p>
+      <h1>Contact</h1>
+      <p class="lead">Questions about a Utah market, a deal, or an opportunity? I'd love to hear from you.</p>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container">
+      <div class="row g-5">
+        <div class="col-lg-7">
+          <form id="contactForm" class="calc-card p-4" novalidate>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label" for="cName">Name</label>
+                <input type="text" class="form-control" id="cName" required>
+                <div class="invalid-feedback">Please enter your name.</div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label" for="cEmail">Email</label>
+                <input type="email" class="form-control" id="cEmail" required>
+                <div class="invalid-feedback">Please enter a valid email.</div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label" for="cWho">I am a…</label>
+                <select class="form-select" id="cWho">
+                  <option>Investor</option>
+                  <option>Recruiter or employer</option>
+                  <option>Student</option>
+                  <option>Real estate professional</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label" for="cTopic">Topic</label>
+                <select class="form-select" id="cTopic">
+                  <option>Market question</option>
+                  <option>Deal review</option>
+                  <option>Job or internship opportunity</option>
+                  <option>Feedback on the site</option>
+                  <option>Something else</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <label class="form-label" for="cMsg">Message</label>
+                <textarea class="form-control" id="cMsg" rows="6" required></textarea>
+                <div class="invalid-feedback">Please write a message.</div>
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn btn-primary"><i class="bi bi-send"></i> Send Message</button>
+                <p class="small text-muted mt-2 mb-0">Clicking send opens your email app with the message filled in.</p>
+                <div id="sentNote" class="alert alert-success mt-3 d-none mb-0">Thanks! Your email app should have opened with your message ready to send.</div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="col-lg-5">
+          <div class="result-box">
+            <h5>Other ways to reach me</h5>
+            <p class="mb-2"><i class="bi bi-envelope"></i> <a href="mailto:emailwyattharris@gmail.com">emailwyattharris@gmail.com</a></p>
+            <p class="mb-4"><i class="bi bi-geo-alt"></i> Provo, Utah</p>
+            <h6>Good reasons to reach out</h6>
+            <ul class="mb-0">
+              <li>Real estate internships and analyst roles</li>
+              <li>A Utah deal you'd like a second set of eyes on</li>
+              <li>Questions about a market covered on this site</li>
+              <li>Fellow BYU Real Estate Association members</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-4">
+          <h5><i class="bi bi-buildings"></i> Wasatch Yield</h5>
+          <p>Utah real estate investing, by the numbers. Built and maintained by Wyatt Harris, a BYU Marriott student focused on Utah real estate.</p>
+        </div>
+        <div class="col-6 col-md-2">
+          <h6>Markets</h6>
+          <ul class="list-unstyled">
+            <li><a href="markets.html">Utah Overview</a></li>
+            <li><a href="provo-orem.html">Provo / Orem</a></li><li><a href="lehi.html">Lehi</a></li><li><a href="salt-lake-city.html">Salt Lake City</a></li><li><a href="st-george.html">St. George</a></li><li><a href="ogden.html">Ogden</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md-2">
+          <h6>Resources</h6>
+          <ul class="list-unstyled">
+            <li><a href="tools.html">Investor Tools</a></li>
+            <li><a href="glossary.html">Glossary</a></li>
+            <li><a href="app.html">Deal Lab Game</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h6>Wyatt Harris</h6>
+          <ul class="list-unstyled">
+            <li><a href="about.html">About</a></li>
+            <li><a href="resume.html">Résumé</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <hr>
+      <p class="small mb-0">&copy; 2026 Wyatt Harris &middot; Provo, Utah &middot; For education only, not investment advice. Market figures are from the public reports cited on each page.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const form = document.getElementById('contactForm');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!form.checkValidity()) { form.classList.add('was-validated'); return; }
+      const name = document.getElementById('cName').value.trim();
+      const email = document.getElementById('cEmail').value.trim();
+      const who = document.getElementById('cWho').value;
+      const topic = document.getElementById('cTopic').value;
+      const msg = document.getElementById('cMsg').value.trim();
+      const subject = encodeURIComponent('[Wasatch Yield] ' + topic + ' from ' + name);
+      const bodyText = encodeURIComponent(msg + '\n\n---\nName: ' + name + '\nEmail: ' + email + '\nI am a: ' + who);
+      window.location.href = 'mailto:emailwyattharris@gmail.com?subject=' + subject + '&body=' + bodyText;
+      document.getElementById('sentNote').classList.remove('d-none');
+      form.reset();
+      form.classList.remove('was-validated');
+    });
+  </script>
+</body>
+</html>

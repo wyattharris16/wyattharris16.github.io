@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Utah Markets & Map | Wasatch Yield</title>
+  <meta name="description" content="Utah real estate investing, by the numbers. Market data, investor tools and analysis for the Utah housing market by Wyatt Harris.">
+  <!-- Bootstrap theme: Bootswatch "Lux" -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/lux/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/site.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html"><i class="bi bi-buildings"></i> Wasatch Yield</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Markets</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item active" href="markets.html">Utah Overview &amp; Map</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="provo-orem.html">Provo / Orem</a></li>
+              <li><a class="dropdown-item" href="lehi.html">Lehi</a></li>
+              <li><a class="dropdown-item" href="salt-lake-city.html">Salt Lake City</a></li>
+              <li><a class="dropdown-item" href="st-george.html">St. George</a></li>
+              <li><a class="dropdown-item" href="ogden.html">Ogden</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="tools.html">Investor Tools</a></li>
+          <li class="nav-item"><a class="nav-link" href="glossary.html">Glossary</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="resume.html">Résumé</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="page-header">
+    <div class="container">
+      <p class="eyebrow"><i class="bi bi-map"></i> Wasatch Yield</p>
+      <h1>Utah Markets</h1>
+      <p class="lead">Statewide trends, county prices and an interactive map of the markets I follow.</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <div class="row g-4 mb-5">
+          <div class="col-md-3 col-6"><div class="stat-card"><div class="label">Statewide median</div><div class="value">$530,000</div><p class="note">Sep 2026, <span class="trend-up">+1.9%</span> vs $520,000</p></div></div>
+          <div class="col-md-3 col-6"><div class="stat-card"><div class="label">Closed sales</div><div class="value">3,516</div><p class="note">Sep 2026, <span class="trend-down">-11.9%</span> YoY</p></div></div>
+          <div class="col-md-3 col-6"><div class="stat-card"><div class="label">Months of supply</div><div class="value">4.7</div><p class="note">Statewide, Sep 2026</p></div></div>
+          <div class="col-md-3 col-6"><div class="stat-card"><div class="label">Zillow typical value</div><div class="value">$532,920</div><p class="note">Sep 2026, <span class="trend-up">+1.2%</span> YoY</p></div></div>
+        </div>
+
+        <h2 class="section-title" id="map">Interactive Utah Market Map</h2>
+        <p>Click a circle to see prices, rents and yields. Bigger, darker circles are more expensive markets. Use the box in the top-right corner to switch on county-level data.</p>
+        <div id="utahMap"></div>
+      </div>
+    </section>
+
+    <section class="section section-sand">
+      <div class="container">
+        <h2 class="section-title">City Comparison</h2>
+        <div class="table-responsive">
+          <table class="table table-hover bg-white">
+            <thead class="table-dark">
+              <tr><th>Market</th><th>Median sale price</th><th>Period</th><th>Metro median rent</th><th>Gross rent yield</th><th>Sample cap rate*</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><a href="provo-orem.html">Provo / Orem</a></td>
+                <td>$542,500</td>
+                <td>Oct 2026</td>
+                <td>$2,300</td>
+                <td>5.46%</td>
+                <td>3.1%</td>
+              </tr>
+              <tr>
+                <td><a href="lehi.html">Lehi</a></td>
+                <td>$589,000</td>
+                <td>Oct 2026</td>
+                <td>$2,300</td>
+                <td>5.46%</td>
+                <td>2.8%</td>
+              </tr>
+              <tr>
+                <td><a href="salt-lake-city.html">Salt Lake City</a></td>
+                <td>$590,000</td>
+                <td>Oct 2026</td>
+                <td>$2,545</td>
+                <td>5.54%</td>
+                <td>3.1%</td>
+              </tr>
+              <tr>
+                <td><a href="st-george.html">St. George</a></td>
+                <td>$500,000</td>
+                <td>Oct 2026</td>
+                <td>$2,150</td>
+                <td>5.83%</td>
+                <td>3.1%</td>
+              </tr>
+              <tr>
+                <td><a href="ogden.html">Ogden</a></td>
+                <td>$370,163</td>
+                <td>Oct 2026</td>
+                <td>$2,345</td>
+                <td>5.81%</td>
+                <td>4.8%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="small text-muted">*My estimate for a median-priced single-family home rented at the metro median rent, after vacancy, taxes, insurance, maintenance, management and reserves. See each city page for the full breakdown.</p>
+
+        <h2 class="section-title mt-5">County Prices</h2>
+        <div class="table-responsive">
+          <table class="table bg-white">
+            <thead class="table-dark"><tr><th>County</th><th>Median single-family price</th><th>Change (YoY)</th><th>Period</th></tr></thead>
+            <tbody>
+              <tr><td>Salt Lake County</td><td>$645,000</td><td class="trend-up">+4.9%</td><td>Q2 2026</td></tr>
+              <tr><td>Utah County</td><td>$600,000</td><td class="trend-down">-0.8%</td><td>Q2 2026</td></tr>
+              <tr><td>Davis County</td><td>$568,450</td><td class="trend-down">-1.6%</td><td>Q2 2026</td></tr>
+              <tr><td>Weber County</td><td>$499,000</td><td class="trend-up">+3.1%</td><td>Q2 2026</td></tr>
+              <tr><td>Tooele County</td><td>$487,495</td><td class="trend-down">-1.5%</td><td>Q2 2026</td></tr>
+              <tr><td>Wasatch County</td><td>~$1,200,000</td><td class="trend-up">about +21%</td><td>Q1 2026</td></tr>
+              <tr><td>Summit County</td><td>~$2,200,000</td><td class="trend-down">about -5%</td><td>Q1 2026</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="row g-5">
+          <div class="col-lg-7">
+            <h2 class="section-title">What the Numbers Say</h2>
+            <p>Utah's housing market is in a slow, steady phase. The statewide median sale price was $530,000 in September 2026, up 1.9% from a year earlier, while closed sales fell 11.9%. Prices are holding, but fewer homes are trading.</p>
+            <p>The Kem C. Gardner Policy Institute's 2025–2026 State of the State's Housing Market report found that Utah's median sale price across all housing types rose from $500,000 to $520,000 between the first quarters of 2025 and 2026, and that Utah ranks as the nation's 10th most expensive single-family market.</p>
+            <p>For investors, the key fact is that rents have not kept up with prices. Utah's statewide median asking rent of $2,350 against an average home value of about $509,500 works out to a gross rental yield of only about 5.6%, which leaves thin cap rates once expenses come out.</p>
+          </div>
+          <div class="col-lg-5">
+            <div class="callout">
+              <h5>My investor takeaways</h5>
+              <ul class="mb-0">
+                <li>Underwrite on today's rent, not on appreciation.</li>
+                <li>More inventory and longer days on market mean room to negotiate.</li>
+                <li>Small multifamily and accessory dwelling units help the math work.</li>
+                <li>Ogden and St. George show the highest gross yields of the metros I track.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-sand" id="sources">
+      <div class="container">
+        <h2 class="section-title">Sources</h2>
+        <ul class="source-list">
+          <li><a href="https://bestutahrealestate.com/utah/market-stats" target="_blank" rel="noopener">Utah Housing Market Report, Sep 2026 (Utah Association of Realtors data)</a></li>
+          <li><a href="https://www.zillow.com/UT/home-values/" target="_blank" rel="noopener">Zillow Home Value Index: Utah</a></li>
+          <li><a href="https://www.utahbusiness.com/press-releases/2026/07/22/high-demand-salt-lake-county-home-price-utah-alpine-huntsville-eden/" target="_blank" rel="noopener">Salt Lake Board of Realtors Q2 2026 county data (Utah Business)</a></li>
+          <li><a href="https://townlift.com/2026/09/summit-county-home-prices-fall-but-most-renters-remain-priced-out/" target="_blank" rel="noopener">Summit and Wasatch County prices, Gardner Institute (TownLift)</a></li>
+          <li><a href="https://attheu.utah.edu/facultystaff/utahs-housing-market-stabilizes-slightly-but-affordability-barriers-remain/" target="_blank" rel="noopener">Kem C. Gardner Policy Institute, State of the State's Housing Market 2025–2026</a></li>
+          <li><a href="https://sfranalytics.com/rental-yields/ut" target="_blank" rel="noopener">SFR Analytics, Utah median rent and gross rental yield (Jul 2026)</a></li>
+          <li><a href="https://sfranalytics.com/rental-yields/ut/salt-lake-city-murray-ut" target="_blank" rel="noopener">SFR Analytics, Utah metro median asking rents and gross yields (Jul 2026)</a></li>
+          <li><a href="provo-orem.html" target="_blank" rel="noopener">Provo / Orem sources: see the Provo / Orem page</a></li>
+          <li><a href="lehi.html" target="_blank" rel="noopener">Lehi sources: see the Lehi page</a></li>
+          <li><a href="salt-lake-city.html" target="_blank" rel="noopener">Salt Lake City sources: see the Salt Lake City page</a></li>
+          <li><a href="st-george.html" target="_blank" rel="noopener">St. George sources: see the St. George page</a></li>
+          <li><a href="ogden.html" target="_blank" rel="noopener">Ogden sources: see the Ogden page</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-4">
+          <h5><i class="bi bi-buildings"></i> Wasatch Yield</h5>
+          <p>Utah real estate investing, by the numbers. Built and maintained by Wyatt Harris, a BYU Marriott student focused on Utah real estate.</p>
+        </div>
+        <div class="col-6 col-md-2">
+          <h6>Markets</h6>
+          <ul class="list-unstyled">
+            <li><a href="markets.html">Utah Overview</a></li>
+            <li><a href="provo-orem.html">Provo / Orem</a></li><li><a href="lehi.html">Lehi</a></li><li><a href="salt-lake-city.html">Salt Lake City</a></li><li><a href="st-george.html">St. George</a></li><li><a href="ogden.html">Ogden</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md-2">
+          <h6>Resources</h6>
+          <ul class="list-unstyled">
+            <li><a href="tools.html">Investor Tools</a></li>
+            <li><a href="glossary.html">Glossary</a></li>
+            <li><a href="app.html">Deal Lab Game</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h6>Wyatt Harris</h6>
+          <ul class="list-unstyled">
+            <li><a href="about.html">About</a></li>
+            <li><a href="resume.html">Résumé</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <hr>
+      <p class="small mb-0">&copy; 2026 Wyatt Harris &middot; Provo, Utah &middot; For education only, not investment advice. Market figures are from the public reports cited on each page.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    const cities = [{"name": "Provo / Orem", "price": 542500, "period": "Oct 2026", "rent": 2300, "yield": 5.46, "url": "provo-orem.html", "lat": 40.2338, "lng": -111.6585}, {"name": "Lehi", "price": 589000, "period": "Oct 2026", "rent": 2300, "yield": 5.46, "url": "lehi.html", "lat": 40.3916, "lng": -111.8508}, {"name": "Salt Lake City", "price": 590000, "period": "Oct 2026", "rent": 2545, "yield": 5.54, "url": "salt-lake-city.html", "lat": 40.7608, "lng": -111.891}, {"name": "St. George", "price": 500000, "period": "Oct 2026", "rent": 2150, "yield": 5.83, "url": "st-george.html", "lat": 37.0965, "lng": -113.5684}, {"name": "Ogden", "price": 370163, "period": "Oct 2026", "rent": 2345, "yield": 5.81, "url": "ogden.html", "lat": 41.223, "lng": -111.9738}];
+    const counties = [{"name": "Salt Lake County", "price": 645000, "period": "Q2 2026", "change": "+4.9%", "lat": 40.667, "lng": -111.924}, {"name": "Utah County", "price": 600000, "period": "Q2 2026", "change": "-0.8%", "lat": 40.119, "lng": -111.67}, {"name": "Davis County", "price": 568450, "period": "Q2 2026", "change": "-1.6%", "lat": 40.98, "lng": -111.95}, {"name": "Weber County", "price": 499000, "period": "Q2 2026", "change": "+3.1%", "lat": 41.27, "lng": -111.87}, {"name": "Tooele County", "price": 487495, "period": "Q2 2026", "change": "-1.5%", "lat": 40.45, "lng": -112.75}, {"name": "Wasatch County", "price": 1200000, "period": "Q1 2026", "change": "about +21%", "lat": 40.33, "lng": -111.17}, {"name": "Summit County", "price": 2200000, "period": "Q1 2026", "change": "about -5%", "lat": 40.87, "lng": -110.97}];
+
+    function color(p) {
+      return p >= 1000000 ? '#7a1f12' :
+             p >= 600000  ? '#b5523b' :
+             p >= 500000  ? '#e08a4c' :
+             p >= 400000  ? '#f2c14e' : '#7fb069';
+    }
+    function fmt(n) { return '$' + Math.round(n).toLocaleString('en-US'); }
+
+    const map = L.map('utahMap', { scrollWheelZoom: false }).setView([39.6, -111.9], 7);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    const cityLayer = L.layerGroup(cities.map(c =>
+      L.circleMarker([c.lat, c.lng], {
+        radius: 9 + c.price / 90000, color: '#1a1a1a', weight: 2, fillColor: color(c.price), fillOpacity: .85
+      }).bindPopup(`<strong>${c.name}</strong><br>Median sale price: ${fmt(c.price)} (${c.period})<br>Metro median rent: ${fmt(c.rent)}/mo<br>Gross rent yield: ${c.yield.toFixed(2)}%<br><a href="${c.url}">Open market page &rarr;</a>`)
+    )).addTo(map);
+
+    const countyLayer = L.layerGroup(counties.map(c =>
+      L.circleMarker([c.lat, c.lng], {
+        radius: 8 + Math.min(c.price, 1500000) / 110000, color: '#ffffff', weight: 2, dashArray: '3', fillColor: color(c.price), fillOpacity: .7
+      }).bindPopup(`<strong>${c.name}</strong><br>Median single-family price: ${c.price >= 1000000 ? '~' : ''}${fmt(c.price)}<br>Change: ${c.change} (${c.period})`)
+    ));
+
+    L.control.layers(null, { 'Cities (Oct 2026)': cityLayer, 'Counties (Q1–Q2 2026)': countyLayer }, { collapsed: false }).addTo(map);
+
+    const legend = L.control({ position: 'bottomright' });
+    legend.onAdd = function () {
+      const div = L.DomUtil.create('div', 'map-legend');
+      div.innerHTML = '<strong>Median price</strong><br>' +
+        '<i style="background:#7fb069"></i>Under $400K<br>' +
+        '<i style="background:#f2c14e"></i>$400K–$500K<br>' +
+        '<i style="background:#e08a4c"></i>$500K–$600K<br>' +
+        '<i style="background:#b5523b"></i>$600K–$1M<br>' +
+        '<i style="background:#7a1f12"></i>$1M+';
+      return div;
+    };
+    legend.addTo(map);
+  </script>
+</body>
+</html>

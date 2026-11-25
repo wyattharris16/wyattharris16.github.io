@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Investor Tools | Wasatch Yield</title>
+  <meta name="description" content="Utah real estate investing, by the numbers. Market data, investor tools and analysis for the Utah housing market by Wyatt Harris.">
+  <!-- Bootstrap theme: Bootswatch "Lux" -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/lux/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html"><i class="bi bi-buildings"></i> Wasatch Yield</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Markets</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="markets.html">Utah Overview &amp; Map</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="provo-orem.html">Provo / Orem</a></li>
+              <li><a class="dropdown-item" href="lehi.html">Lehi</a></li>
+              <li><a class="dropdown-item" href="salt-lake-city.html">Salt Lake City</a></li>
+              <li><a class="dropdown-item" href="st-george.html">St. George</a></li>
+              <li><a class="dropdown-item" href="ogden.html">Ogden</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link active" aria-current="page" href="tools.html">Investor Tools</a></li>
+          <li class="nav-item"><a class="nav-link" href="glossary.html">Glossary</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="resume.html">Résumé</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="page-header">
+    <div class="container">
+      <p class="eyebrow"><i class="bi bi-calculator"></i> Wasatch Yield</p>
+      <h1>Investor Tools</h1>
+      <p class="lead">Four working calculators for underwriting Utah real estate. Every number updates as you type.</p>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container">
+      <ul class="nav nav-pills mb-4 flex-wrap" role="tablist">
+        <li class="nav-item" role="presentation"><button class="nav-link active" id="tab-cashflow" data-bs-toggle="pill" data-bs-target="#cashflow" type="button" role="tab"><i class="bi bi-cash-stack"></i> Rental Cash Flow</button></li>
+        <li class="nav-item" role="presentation"><button class="nav-link" id="tab-caprate" data-bs-toggle="pill" data-bs-target="#caprate" type="button" role="tab"><i class="bi bi-percent"></i> Cap Rate &amp; Value</button></li>
+        <li class="nav-item" role="presentation"><button class="nav-link" id="tab-mortgage" data-bs-toggle="pill" data-bs-target="#mortgage" type="button" role="tab"><i class="bi bi-bank"></i> Mortgage</button></li>
+        <li class="nav-item" role="presentation"><button class="nav-link" id="tab-flip" data-bs-toggle="pill" data-bs-target="#flip" type="button" role="tab"><i class="bi bi-hammer"></i> Flip &amp; BRRRR</button></li>
+      </ul>
+
+      <div class="tab-content">
+        <!-- CASH FLOW -->
+        <div class="tab-pane fade show active" id="cashflow" role="tabpanel">
+          <div class="row g-4">
+            <div class="col-lg-7">
+              <div class="calc-card p-4">
+                <h4>Rental Cash Flow Analyzer</h4>
+                <p class="small text-muted">Start from a Utah market preset, then adjust anything.</p>
+                <label class="form-label" for="cfPreset">Load a Utah market (median price and metro rent)</label>
+                <select class="form-select form-select-sm mb-3" id="cfPreset"><option value="">Choose a market…</option><option value="Provo / Orem">Provo / Orem ($542,500, $2,300/mo)</option><option value="Lehi">Lehi ($589,000, $2,300/mo)</option><option value="Salt Lake City">Salt Lake City ($590,000, $2,545/mo)</option><option value="St. George">St. George ($500,000, $2,150/mo)</option><option value="Ogden">Ogden ($370,163, $2,345/mo)</option></select>
+                <div class="row g-3">
+                  <div class="col-6">
+                    <label class="form-label" for="cfPrice">Purchase price</label>
+                    <div class="input-group input-group-sm"><span class="input-group-text">$</span><input type="number" class="form-control" id="cfPrice" value="542500" step="1000" min="0"></div>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label" for="cfDown">Down payment</label>
+                    <div class="input-group input-group-sm"><input type="number" class="form-control" id="cfDown" value="25" step="1" min="0"><span class="input-group-text">%</span></div>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label" for="cfRate">Interest rate</label>
+                    <div class="input-group input-group-sm"><input type="number" class="form-control" id="cfRate" value="7.33" step="0.01" min="0"><span class="input-group-text">%</span></div>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label" for="cfTerm">Loan term</label>
+                    <div class="input-group input-group-sm"><input type="number" class="form-control" id="cfTerm" value="30" step="1" min="0"><span class="input-group-text">yrs</span></div>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label" for="cfClosing">Closing costs</label>
+                    <div class="input-group input-group-sm"><input type="number" class="form-control" id="cfClosing" value="3" step="0.5" min="0"><span class="input-group-text">%</span></div>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label" for="cfRent">Monthly rent</label>
+                    <div class="input-group input-group-sm"><span class="input-group-text">$</span><input type="number" class="form-control" id="cfRent" value="2300" step="25" min="0"></div>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label" for="cfOther">Other income / mo</label>
+                    <div class="input-group input-group-sm"><span class="input-group-text">$</span><input type="number" class="form-control" id="cfOther" value="0" step="10" min="0"></div>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label" for="cfVacancy">Vacancy</label>
+                    <div class="input-group input-group-sm"><input type="number" class="form-control" id="cfVacancy" value="5" step="0.5" min="0"><span class="input-group-text">%</span></div>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label" for="cfTax">Property tax (of price)</label>
+                    <div class="input-group input-group-sm"><input type="number" class="form-control" id="cfTax" value="0.55" step="0.05" min="0"><span class="input-group-text">%</span></div>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label" for="cfIns">Insurance / yr</label>
+                    <div class="input-group input-group-sm"><span class="input-group-text">$</span><input type="number" class="form-control" id="cfIns" value="1000" step="50" min="0"></div>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label" for="cfHoa">HOA / mo</label>
+                    <div class="input-group input-group-sm"><span class="input-group-text">$</span><input type="number" class="form-control" id="cfHoa" value="0" step="10" min="0"></div>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label" for="cfUtil">Owner-paid utilities / mo</label>
+                    <div class="input-group input-group-sm"><span class="input-group-text">$</span><input type="number" class="form-control" id="cfUtil" value="0" step="10" min="0"></div>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label" for="cfMaint">Maintenance (of rent)</label>
+                    <div class="input-group input-group-sm"><input type="number" class="form-control" id="cfMaint" value="8" step="0.5" min="0"><span class="input-group-text">%</span></div>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label" for="cfMgmt">Management (of collected rent)</label>
+                    <div class="input-group input-group-sm"><input type="number" class="form-control" id="cfMgmt" value="8" step="0.5" min="0"><span class="input-group-text">%</span></div>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label" for="cfCapex">Capital reserves (of rent)</label>
+                    <div class="input-group input-group-sm"><input type="number" class="form-control" id="cfCapex" value="5" step="0.5" min="0"><span class="input-group-text">%</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <div class="result-box">
+                <p class="text-muted small text-uppercase mb-1">Monthly cash flow</p>
+                <div class="result-big" id="cfMonthly">–</div>
+                <p id="cfAnnual" class="text-muted"></p>
+                <div class="result-row"><span>Mortgage payment (P&amp;I)</span><strong id="cfPmt">–</strong></div>
+                <div class="result-row"><span>Effective gross income</span><strong id="cfEgi">–</strong></div>
+                <div class="result-row"><span>Operating expenses</span><strong id="cfOpex">–</strong></div>
+                <div class="result-row"><span>Net operating income (NOI)</span><strong id="cfNoi">–</strong></div>
+                <div class="result-row"><span>Cap rate</span><strong id="cfCap">–</strong></div>
+                <div class="result-row"><span>Cash invested</span><strong id="cfCash">–</strong></div>
+                <div class="result-row"><span>Cash-on-cash return</span><strong id="cfCoc">–</strong></div>
+                <div class="result-row"><span>Debt service coverage (DSCR)</span><strong id="cfDscr">–</strong></div>
+                <div class="result-row"><span>Rent-to-price (1% rule)</span><strong id="cfRule">–</strong></div>
+                <div class="callout mt-3 small" id="cfVerdict"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CAP RATE -->
+        <div class="tab-pane fade" id="caprate" role="tabpanel">
+          <div class="row g-4">
+            <div class="col-lg-6">
+              <div class="calc-card p-4">
+                <h4>Cap Rate &amp; Income Value</h4>
+                <p class="small text-muted">Cap rate = NOI ÷ price. Value = NOI ÷ market cap rate.</p>
+                <div class="row g-3">
+                  <div class="col-12">
+                    <label class="form-label" for="capNoi">Annual NOI</label>
+                    <div class="input-group input-group-sm"><span class="input-group-text">$</span><input type="number" class="form-control" id="capNoi" value="1140000" step="1000" min="0"></div>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label" for="capPrice">Asking price</label>
+                    <div class="input-group input-group-sm"><span class="input-group-text">$</span><input type="number" class="form-control" id="capPrice" value="18500000" step="10000" min="0"></div>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label" for="capMarket">Market cap rate</label>
+                    <div class="input-group input-group-sm"><input type="number" class="form-control" id="capMarket" value="6.0" step="0.05" min="0"><span class="input-group-text">%</span></div>
+                  </div>
+                </div>
+                <p class="small text-muted mt-3 mb-0">The default is the Lehi office building from my Deal Lab game.</p>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="result-box">
+                <div class="result-row"><span>Cap rate at asking price</span><strong id="capRate">–</strong></div>
+                <div class="result-row"><span>Value at market cap rate</span><strong id="capValue">–</strong></div>
+                <div class="result-row"><span>Asking vs. value</span><strong id="capDiff">–</strong></div>
+                <h6 class="mt-4">Sensitivity: value at different cap rates</h6>
+                <table class="table table-sm mb-0"><thead><tr><th>Cap rate</th><th class="text-end">Value</th></tr></thead><tbody id="capSens"></tbody></table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MORTGAGE -->
+        <div class="tab-pane fade" id="mortgage" role="tabpanel">
+          <div class="row g-4">
+            <div class="col-lg-6">
+              <div class="calc-card p-4">
+                <h4>Mortgage Payment</h4>
+                <p class="small text-muted">Includes Utah's relatively low property taxes, insurance and PMI.</p>
+                <div class="row g-3">
+                  <div class="col-6">
+                    <label class="form-label" for="mPrice">Home price</label>
+                    <div class="input-group input-group-sm"><span class="input-group-text">$</span><input type="number" class="form-control" id="mPrice" value="542500" step="1000" min="0"></div>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label" for="mDown">Down payment</label>
+                    <div class="input-group input-group-sm"><input type="number" class="form-control" id="mDown" value="20" step="1" min="0"><span class="input-group-text">%</span></div>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label" for="mRate">Interest rate</label>
+                    <div class="input-group input-group-sm"><input type="number" class="form-control" id="mRate" value="7.33" step="0.01" min="0"><span class="input-group-text">%</span></div>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label" for="mTerm">Term</label>
+                    <div class="input-group input-group-sm"><input type="number" class="form-control" id="mTerm" value="30" step="1" min="0"><span class="input-group-text">yrs</span></div>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label" for="mTax">Property tax (of price)</label>
+                    <div class="input-group input-group-sm"><input type="number" class="form-control" id="mTax" value="0.55" step="0.05" min="0"><span class="input-group-text">%</span></div>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label" for="mIns">Insurance / yr</label>
+                    <div class="input-group input-group-sm"><span class="input-group-text">$</span><input type="number" class="form-control" id="mIns" value="1200" step="50" min="0"></div>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label" for="mHoa">HOA / mo</label>
+                    <div class="input-group input-group-sm"><span class="input-group-text">$</span><input type="number" class="form-control" id="mHoa" value="0" step="10" min="0"></div>
+                  </div>
+                </div>
+                <p class="small text-muted mt-3 mb-0">PMI is estimated at 0.5% of the loan per year when the down payment is under 20%.</p>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="result-box">
+                <p class="text-muted small text-uppercase mb-1">Total monthly payment</p>
+                <div class="result-big" id="mTotal">–</div>
+                <div class="result-row"><span>Loan amount</span><strong id="mLoan">–</strong></div>
+                <div class="result-row"><span>Principal &amp; interest</span><strong id="mPi">–</strong></div>
+                <div class="result-row"><span>Property tax</span><strong id="mTaxOut">–</strong></div>
+                <div class="result-row"><span>Insurance</span><strong id="mInsOut">–</strong></div>
+                <div class="result-row"><span>PMI</span><strong id="mPmi">–</strong></div>
+                <div class="result-row"><span>HOA</span><strong id="mHoaOut">–</strong></div>
+                <div class="result-row"><span>Total interest over the loan</span><strong id="mInterest">–</strong></div>
+                <div class="result-row"><span>Income needed (30% rule)</span><strong id="mIncome">–</strong></div>
+                <h6 class="mt-4">Amortization</h6>
+                <div class="table-responsive"><table class="table table-sm mb-0"><thead><tr><th></th><th class="text-end">Principal</th><th class="text-end">Interest</th><th class="text-end">Balance</th></tr></thead><tbody id="mAmort"></tbody></table></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FLIP / BRRRR -->
+        <div class="tab-pane fade" id="flip" role="tabpanel">
+          <div class="row g-4">
+            <div class="col-lg-6">
+              <div class="calc-card p-4">
+                <h4>Fix &amp; Flip</h4>
+                <div class="row g-3">
+                  <div class="col-6">
+                    <label class="form-label" for="fBuy">Purchase price</label>
+                    <div class="input-group input-group-sm"><span class="input-group-text">$</span><input type="number" class="form-control" id="fBuy" value="300000" step="1000" min="0"></div>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label" for="fRehab">Rehab budget</label>
+                    <div class="input-group input-group-sm"><span class="input-group-text">$</span><input type="number" class="form-control" id="fRehab" value="60000" step="1000" min="0"></div>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label" for="fArv">After-repair value (ARV)</label>
+                    <div class="input-group input-group-sm"><span class="input-group-text">$</span><input type="number" class="form-control" id="fArv" value="420000" step="1000" min="0"></div>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label" for="fBuyClose">Buying costs</label>
+                    <div class="input-group input-group-sm"><input type="number" class="form-control" id="fBuyClose" value="3" step="0.5" min="0"><span class="input-group-text">%</span></div>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label" for="fHoldMo">Holding period</label>
+                    <div class="input-group input-group-sm"><input type="number" class="form-control" id="fHoldMo" value="6" step="1" min="0"><span class="input-group-text">mo</span></div>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label" for="fHoldCost">Holding cost / mo</label>
+                    <div class="input-group input-group-sm"><span class="input-group-text">$</span><input type="number" class="form-control" id="fHoldCost" value="2500" step="50" min="0"></div>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label" for="fSell">Selling costs (of ARV)</label>
+                    <div class="input-group input-group-sm"><input type="number" class="form-control" id="fSell" value="7" step="0.5" min="0"><span class="input-group-text">%</span></div>
+                  </div>
+                </div>
+                <h4 class="mt-4">BRRRR Refinance</h4>
+                <p class="small text-muted">Buy, rehab, rent, refinance, repeat. Uses the same purchase, rehab and ARV.</p>
+                <div class="row g-3">
+                  <div class="col-6">
+                    <label class="form-label" for="bLtv">Refinance loan-to-value</label>
+                    <div class="input-group input-group-sm"><input type="number" class="form-control" id="bLtv" value="75" step="1" min="0"><span class="input-group-text">%</span></div>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label" for="bRate">Refinance rate</label>
+                    <div class="input-group input-group-sm"><input type="number" class="form-control" id="bRate" value="7.33" step="0.01" min="0"><span class="input-group-text">%</span></div>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label" for="bRent">Monthly rent</label>
+                    <div class="input-group input-group-sm"><span class="input-group-text">$</span><input type="number" class="form-control" id="bRent" value="2400" step="25" min="0"></div>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label" for="bExp">Expenses + vacancy (of rent)</label>
+                    <div class="input-group input-group-sm"><input type="number" class="form-control" id="bExp" value="40" step="1" min="0"><span class="input-group-text">%</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="result-box mb-4">
+                <p class="text-muted small text-uppercase mb-1">Flip profit</p>
+                <div class="result-big" id="fProfit">–</div>
+                <div class="result-row"><span>All-in cost</span><strong id="fAllIn">–</strong></div>
+                <div class="result-row"><span>Return on cost</span><strong id="fRoi">–</strong></div>
+                <div class="result-row"><span>70% rule max offer</span><strong id="f70">–</strong></div>
+              </div>
+              <div class="result-box" style="height:auto">
+                <p class="text-muted small text-uppercase mb-1">BRRRR monthly cash flow</p>
+                <div class="result-big" id="bCf">–</div>
+                <div class="result-row"><span>New loan at refinance</span><strong id="bLoan">–</strong></div>
+                <div class="result-row"><span>Cash left in the deal</span><strong id="bLeft">–</strong></div>
+                <div class="result-row"><span>New mortgage payment</span><strong id="bPmt">–</strong></div>
+                <div class="result-row"><span>Cash-on-cash on cash left in</span><strong id="bCoc">–</strong></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout mt-5">
+        <strong>Want to practice?</strong> Test your NOI and cap rate instincts on six timed Utah cases in the <a href="app.html">Deal Lab game</a>. New to the terms? Check the <a href="glossary.html">glossary</a>.
+        <br><span class="small text-muted">These calculators are for education and rough screening, not financial advice.</span>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-4">
+          <h5><i class="bi bi-buildings"></i> Wasatch Yield</h5>
+          <p>Utah real estate investing, by the numbers. Built and maintained by Wyatt Harris, a BYU Marriott student focused on Utah real estate.</p>
+        </div>
+        <div class="col-6 col-md-2">
+          <h6>Markets</h6>
+          <ul class="list-unstyled">
+            <li><a href="markets.html">Utah Overview</a></li>
+            <li><a href="provo-orem.html">Provo / Orem</a></li><li><a href="lehi.html">Lehi</a></li><li><a href="salt-lake-city.html">Salt Lake City</a></li><li><a href="st-george.html">St. George</a></li><li><a href="ogden.html">Ogden</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md-2">
+          <h6>Resources</h6>
+          <ul class="list-unstyled">
+            <li><a href="tools.html">Investor Tools</a></li>
+            <li><a href="glossary.html">Glossary</a></li>
+            <li><a href="app.html">Deal Lab Game</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h6>Wyatt Harris</h6>
+          <ul class="list-unstyled">
+            <li><a href="about.html">About</a></li>
+            <li><a href="resume.html">Résumé</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <hr>
+      <p class="small mb-0">&copy; 2026 Wyatt Harris &middot; Provo, Utah &middot; For education only, not investment advice. Market figures are from the public reports cited on each page.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const presets = {"Provo / Orem": {"price": 542500, "rent": 2300}, "Lehi": {"price": 589000, "rent": 2300}, "Salt Lake City": {"price": 590000, "rent": 2545}, "St. George": {"price": 500000, "rent": 2150}, "Ogden": {"price": 370163, "rent": 2345}};
+    const $ = id => document.getElementById(id);
+    const v = id => parseFloat($(id).value) || 0;
+    const fmt = n => (n < 0 ? '−$' : '$') + Math.abs(Math.round(n)).toLocaleString('en-US');
+    const pct = (n, d = 2) => isFinite(n) ? n.toFixed(d) + '%' : '–';
+    function payment(loan, ratePct, years) {
+      const r = ratePct / 100 / 12, n = years * 12;
+      if (n <= 0) return 0;
+      return r === 0 ? loan / n : loan * r / (1 - Math.pow(1 + r, -n));
+    }
+    function setSign(id, val) {
+      const el = $(id);
+      el.classList.toggle('trend-down', val < 0);
+      el.classList.toggle('trend-up', val > 0);
+    }
+
+    // ---------- rental cash flow ----------
+    function calcCashFlow() {
+      const price = v('cfPrice'), down = v('cfDown') / 100;
+      const loan = price * (1 - down);
+      const pmt = payment(loan, v('cfRate'), v('cfTerm'));
+      const gpr = (v('cfRent') + v('cfOther')) * 12;
+      const vac = gpr * v('cfVacancy') / 100;
+      const egi = gpr - vac;
+      const opex = price * v('cfTax') / 100 + v('cfIns') + (v('cfHoa') + v('cfUtil')) * 12
+                 + gpr * v('cfMaint') / 100 + egi * v('cfMgmt') / 100 + gpr * v('cfCapex') / 100;
+      const noi = egi - opex;
+      const debt = pmt * 12;
+      const cf = noi - debt;
+      const cash = price * down + price * v('cfClosing') / 100;
+      $('cfPmt').textContent = fmt(pmt) + '/mo';
+      $('cfEgi').textContent = fmt(egi);
+      $('cfOpex').textContent = fmt(opex) + (egi > 0 ? ` (${(opex / egi * 100).toFixed(0)}% of income)` : '');
+      $('cfNoi').textContent = fmt(noi);
+      $('cfCap').textContent = pct(noi / price * 100);
+      $('cfCash').textContent = fmt(cash);
+      $('cfCoc').textContent = pct(cf / cash * 100);
+      $('cfDscr').textContent = debt > 0 ? (noi / debt).toFixed(2) + 'x' : 'No loan';
+      $('cfRule').textContent = pct(v('cfRent') / price * 100) + (v('cfRent') / price >= 0.01 ? ' ✓ passes 1% rule' : ' ✗ below 1% rule');
+      $('cfMonthly').textContent = fmt(cf / 12);
+      $('cfAnnual').textContent = fmt(cf) + ' per year';
+      setSign('cfMonthly', cf);
+      setSign('cfCoc', cf);
+      let verdict;
+      if (cf >= 200 * 12 && noi / debt >= 1.25) verdict = 'Strong: healthy cash flow and comfortable debt coverage.';
+      else if (cf >= 0) verdict = 'Break-even to modest: it pays for itself, with little cushion.';
+      else verdict = 'Negative cash flow: you would be paying out of pocket each month. Try a lower price, more down or higher rent.';
+      $('cfVerdict').textContent = verdict;
+    }
+
+    // ---------- cap rate ----------
+    function calcCap() {
+      const noi = v('capNoi'), price = v('capPrice'), mkt = v('capMarket') / 100;
+      const cap = noi / price * 100;
+      const value = mkt > 0 ? noi / mkt : 0;
+      $('capRate').textContent = pct(cap);
+      $('capValue').textContent = fmt(value);
+      const diff = value - price;
+      $('capDiff').textContent = (diff >= 0 ? 'Priced ' : 'Priced ') + fmt(Math.abs(diff)) + (diff >= 0 ? ' below' : ' above') + ' income value';
+      setSign('capDiff', diff);
+      const sens = [-1, -0.5, 0, 0.5, 1].map(d => {
+        const c = v('capMarket') + d;
+        return `<tr><td>${c.toFixed(2)}%</td><td class="text-end">${c > 0 ? fmt(noi / (c / 100)) : '–'}</td></tr>`;
+      }).join('');
+      $('capSens').innerHTML = sens;
+    }
+
+    // ---------- mortgage ----------
+    function calcMortgage() {
+      const price = v('mPrice'), down = v('mDown') / 100, years = v('mTerm');
+      const loan = price * (1 - down);
+      const pmt = payment(loan, v('mRate'), years);
+      const tax = price * v('mTax') / 100 / 12;
+      const ins = v('mIns') / 12;
+      const hoa = v('mHoa');
+      const pmi = down < 0.2 ? loan * 0.005 / 12 : 0;
+      const total = pmt + tax + ins + hoa + pmi;
+      $('mLoan').textContent = fmt(loan);
+      $('mPi').textContent = fmt(pmt);
+      $('mTaxOut').textContent = fmt(tax);
+      $('mInsOut').textContent = fmt(ins);
+      $('mPmi').textContent = pmi > 0 ? fmt(pmi) : 'None (20%+ down)';
+      $('mHoaOut').textContent = fmt(hoa);
+      $('mTotal').textContent = fmt(total) + '/mo';
+      $('mInterest').textContent = fmt(pmt * years * 12 - loan);
+      $('mIncome').textContent = fmt(total * 12 / 0.30);
+      // yearly amortization
+      const r = v('mRate') / 100 / 12;
+      let bal = loan, rows = '';
+      for (let y = 1; y <= years; y++) {
+        let int = 0, prin = 0;
+        for (let m = 0; m < 12; m++) {
+          const i = bal * r; const p = Math.min(pmt - i, bal);
+          int += i; prin += p; bal -= p;
+        }
+        if ([1, 2, 3, 5, 10, 15, 20, 25, 30].includes(y) || y === years)
+          rows += `<tr><td>Year ${y}</td><td class="text-end">${fmt(prin)}</td><td class="text-end">${fmt(int)}</td><td class="text-end">${fmt(Math.max(bal, 0))}</td></tr>`;
+      }
+      $('mAmort').innerHTML = rows;
+    }
+
+    // ---------- flip / BRRRR ----------
+    function calcFlip() {
+      const buy = v('fBuy'), rehab = v('fRehab'), arv = v('fArv');
+      const buyClose = buy * v('fBuyClose') / 100;
+      const hold = v('fHoldMo') * v('fHoldCost');
+      const sell = arv * v('fSell') / 100;
+      const allIn = buy + buyClose + rehab + hold;
+      const profit = arv - sell - allIn;
+      $('fAllIn').textContent = fmt(allIn);
+      $('fProfit').textContent = fmt(profit);
+      setSign('fProfit', profit);
+      $('fRoi').textContent = pct(profit / allIn * 100, 1);
+      const max70 = arv * 0.7 - rehab;
+      $('f70').textContent = fmt(max70) + (buy <= max70 ? ' ✓ your price fits' : ' ✗ you are paying more');
+      // BRRRR
+      const newLoan = arv * v('bLtv') / 100;
+      const left = allIn - newLoan;
+      const pmt = payment(newLoan, v('bRate'), 30);
+      const rent = v('bRent');
+      const noi = rent * 12 * (1 - v('bExp') / 100);
+      const cf = noi / 12 - pmt;
+      $('bLoan').textContent = fmt(newLoan);
+      $('bLeft').textContent = left <= 0 ? fmt(-left) + ' pulled out (infinite return!)' : fmt(left) + ' still in the deal';
+      $('bPmt').textContent = fmt(pmt) + '/mo';
+      $('bCf').textContent = fmt(cf) + '/mo';
+      setSign('bCf', cf);
+      $('bCoc').textContent = left > 0 ? pct(cf * 12 / left * 100, 1) : '∞';
+    }
+
+    function all() { calcCashFlow(); calcCap(); calcMortgage(); calcFlip(); }
+    document.querySelectorAll('input').forEach(i => i.addEventListener('input', all));
+    $('cfPreset').addEventListener('change', e => {
+      const p = presets[e.target.value];
+      if (p) { $('cfPrice').value = p.price; $('cfRent').value = p.rent; $('mPrice').value = p.price; all(); }
+    });
+
+    // prefill from a city page link: tools.html?price=...&rent=...
+    const qs = new URLSearchParams(location.search);
+    if (qs.get('price')) { $('cfPrice').value = qs.get('price'); $('mPrice').value = qs.get('price'); }
+    if (qs.get('rent')) $('cfRent').value = qs.get('rent');
+    all();
+
+    // open the right tab from the URL hash
+    const tabMap = { '#cashflow': 'tab-cashflow', '#caprate': 'tab-caprate', '#mortgage': 'tab-mortgage', '#flip': 'tab-flip' };
+    if (tabMap[location.hash]) bootstrap.Tab.getOrCreateInstance(document.getElementById(tabMap[location.hash])).show();
+  </script>
+</body>
+</html>
